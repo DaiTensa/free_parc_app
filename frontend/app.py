@@ -1,19 +1,19 @@
 import streamlit as st
+from streamlit_js_eval import get_geolocation
+import pandas as pd
 import requests
 
-st.title("Partage de Places de Parking 🚗")
+st.title("🚗 FreePark 🚗")
 st.write("Bienvenue sur l'application de partage de places de parking entre particuliers.")
 
-API_URL = "http://127.0.0.1:8000"  # Remplace par l'URL de ton API FastAPI
+API_URL = "http://127.0.0.1:8000"  
 
-# st.set_page_config(page_title="Gestion des Réservations", layout="centered")
-
-st.title("🚗 Gestion des Réservations de Parking")
+st.title("🚗 Gestion des Réservations de Parking 🚗")
 
 if "token" not in st.session_state:
     st.session_state.token = None
 
-# 📌 Authentification de l'utilisateur (simple pour l'instant)
+# Authentification de l'utilisateur
 st.sidebar.title("Connexion")
 email = st.sidebar.text_input("Email", "test@example.com", key="email_login")
 password = st.sidebar.text_input("Mot de passe", type="password", key="password_login")
@@ -50,7 +50,7 @@ if st.session_state.token:
                 else:
                     st.error("Erreur lors de la réservation.")
 
-# Afficher les réservations en cours
+    # Afficher les réservations en cours
     st.subheader("Vos Réservations Actuelles")
     response = requests.get(f"{API_URL}/reservations/available", headers=headers)  # Route pour récupérer les réservations de l'utilisateur
     if response.status_code == 200:
@@ -73,6 +73,35 @@ if st.session_state.token:
     else:
         st.error("Erreur lors de la récupération des réservations.")
 
+    # créer une place de parking
+    st.subheader("📍Créer une place de parking")
+
+    location = get_geolocation()
+
+    if location:
+        lat = location['coords']['latitude']
+        lon = location['coords']['longitude']
+        st.success(f"Ta position : {lat}, {lon}")
+
+        with st.form("form_create_parking"):
+            name = st.text_input("Nom de la place")
+            location = st.text_input("Emplacement")
+            submit_button = st.form_submit_button("Créer la place")
+
+            if submit_button:
+                response = requests.post(f"{API_URL}/parkingspots/create", json={"name": name, "location": location, "latitude": lat, "longitude": lon}, headers=headers)
+                if response.status_code == 200:
+                    st.success("Place créée avec succès !")
+                else:
+                    try:
+                        st.error(response.json()["detail"])
+                    except:
+                        st.error("Erreur lors de la création de la place.")
+    else:
+        st.warning("Impossible de récupérer la position GPS.")
+
+
+
 
 st.sidebar.title("Enregistrement")
 email_create_count = st.sidebar.text_input("Email", "test@example.com", key="email_create")
@@ -89,3 +118,4 @@ if st.sidebar.button("Créer un compte"):
         st.sidebar.error(data["detail"])
     else:
         st.sidebar.success("Compte créé avec succès !")
+
