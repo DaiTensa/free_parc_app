@@ -48,7 +48,6 @@ def create_parking_spot(db: Session, spot: ParkingSpotCreate):
     return db_spot
 
 
-
 def create_reservation(db: Session, reservation_data: ReservationCreate, user_id: int):
     """Crée une réservation avec la date de début automatique."""
     reservation = Reservation(
