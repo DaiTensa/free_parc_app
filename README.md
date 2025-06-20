@@ -141,12 +141,12 @@ python scrap_process.py
 ### Orchestration (Airflow)
 Airflow est utilisé pour automatiser l'exécution du scraper et le traitement des données.
 
+
 **Lancement d'Airflow:**
 
 ```sh
 ./run_astro.sh
 ```
-
 L'interface Airflow sera accessible sur http://localhost:8080
 
 ## API Endpoints
