@@ -1,0 +1,7 @@
+project:
+  name: orchestration
+
+mounts:
+  - source: /mnt/c/Users/daite/Documents/Python_Projects/free_parc_app/orchestration/data
+    target: /usr/local/airflow/data
+    type: bind
