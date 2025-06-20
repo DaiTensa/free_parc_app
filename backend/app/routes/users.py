@@ -16,7 +16,7 @@ def create_new_user(user: UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail=new_user["error"])
     else:
         # Si l'utilisateur a été créé avec succès, retourner l'utilisateur
-        return create_user(db, user)
+        return new_user
 
 
 @router.get("/all", response_model=list[UserResponse])

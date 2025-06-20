@@ -89,7 +89,5 @@ origin  https://github.com/ancien-nom-repo.git (push)
 
 git remote set-url origin https://github.com/nouveau-nom-repo.git
 
-
-
-
+git branch -r Lists all the remote branches
 
