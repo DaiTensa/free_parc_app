@@ -23,7 +23,6 @@
 - Données Géospatiales
 - Auteurs
 
-
 ## Présentation du Projet
 
 FreeParKApp est une plateforme  permettant le partage de places de parking entre particuliers. L'application permet aux utilisateurs de mettre à disposition leurs places de parking inutilisées et de réserver des places disponibles à proximité.
@@ -62,52 +61,47 @@ FreeParcApp/
 
 1. **Cloner le dépôt**
 
-   ```sh
-   git clone https://github.com/votre-username/free-parc-app.git
-   cd free-parc-app
-   ```
-
-  
+ ```sh
+ git clone https://github.com/votre-username/free-parc-app.git
+ cd free-parc-app
+ ```
 2. **Configurer l'environnement Python avec Poetry**
 
-   ```sh
-   poetry install --no-root
-   ```
+ ```sh
+ poetry install --no-root
+ ```
 
-  
 3. **Configurer la base de données PostgreSQL**
 
-   ```sh
-   sudo apt update
-   sudo apt install postgresql postgresql-contrib
-   sudo systemctl status postgresql
-   # Accéder à PostgreSQL
-   sudo -i -u postgres
-   psql
-   # Créer un utilisateur et une base de données
-   CREATE USER user_test WITH PASSWORD 'pass1234';
-   CREATE DATABASE db_test;
-   GRANT ALL PRIVILEGES ON DATABASE db_test TO user_test;
-   GRANT USAGE ON SCHEMA public TO user_test;
-   GRANT CREATE ON SCHEMA public TO user_test;
-   GRANT CONNECT ON DATABASE db_test TO user_test;
-   ```
+ ```sh
+ sudo apt update
+ sudo apt install postgresql postgresql-contrib
+ sudo systemctl status postgresql
+ # Accéder à PostgreSQL
+ sudo -i -u postgres
+ psql
+ # Créer un utilisateur et une base de données
+ CREATE USER user_test WITH PASSWORD 'pass1234';
+ CREATE DATABASE db_test;
+ GRANT ALL PRIVILEGES ON DATABASE db_test TO user_test;
+ GRANT USAGE ON SCHEMA public TO user_test;
+ GRANT CREATE ON SCHEMA public TO user_test;
+ GRANT CONNECT ON DATABASE db_test TO user_test;
+ ```
 
-  
 4. **Configurer les variables d'environnement**
 
-   ```sh
-   # Créer un fichier .env à la racine du projet
-   DBHOST=localhost
-   DBNAME=db_test
-   DBUSER=user_test
-   PASSWORD=pass1234
-   SECRET_KEY=votre_clé_secrète
-   ALGORITHM=HS256
-   ACCESS_TOKEN_EXPIRE_MINUTES=30
-   ```
-
-  
+ ```sh
+ # Créer un fichier .env à la racine du projet
+ DBHOST=localhost
+ DBNAME=db_test
+ DBUSER=user_test
+ PASSWORD=pass1234
+ SECRET_KEY=votre_clé_secrète
+ ALGORITHM=HS256
+ ACCESS_TOKEN_EXPIRE_MINUTES=30
+ ```
+ 
 ## Composants Principaux
 
 ### Backend (FastAPI)
@@ -155,8 +149,6 @@ Airflow est utilisé pour automatiser l'exécution du scraper et le traitement d
 
 L'interface Airflow sera accessible sur http://localhost:8080
 
-  
-
 ## API Endpoints
 ### Authentification
 
@@ -190,9 +182,9 @@ L'interface Airflow sera accessible sur http://localhost:8080
 
 1. **Environnement virtuel**
 
-   ```sh
-   poetry shell
-   ```
+ ```sh
+ poetry shell
+ ```
 
   
 2. **Structure de la base de données**
@@ -203,9 +195,9 @@ L'interface Airflow sera accessible sur http://localhost:8080
 
 2. **Tests**
 
-   ```sh
-   pytest tests/
-   ```
+ ```sh
+ pytest tests/
+ ```
 
 ## Déploiement
 
@@ -213,23 +205,20 @@ L'interface Airflow sera accessible sur http://localhost:8080
 
 1. **Variables d'environnement**
 
-   Assurez-vous de configurer les variables d'environnement correctement pour la production.
-
+Assurez-vous de configurer les variables d'environnement correctement pour la production.
 
 2. **Base de données**
-
-   Utilisez une instance PostgreSQL sécurisée pour la production.
+Utilisez une instance PostgreSQL sécurisée pour la production.
 
 3. **Serveur Web**
 
-   Déployez l'API FastAPI derrière un proxy comme Nginx avec Gunicorn.
+Déployez l'API FastAPI derrière un proxy comme Nginx avec Gunicorn.
 
 ## Données Géospatiales
 
 Le projet utilise des données OpenStreetMap pour la région Nord-Pas-de-Calais, récupérées automatiquement via un scraper Scrapy qui collecte les fichiers .osm.pbf depuis Geofabrik.
 
 Ces données sont utilisées pour enrichir l'expérience utilisateur en fournissant des informations contextuelles sur les emplacements de parking.
-
 
 ## Auteur
 - **DaiTensa** - [GitHub](https://github.com/DaiTensa)
