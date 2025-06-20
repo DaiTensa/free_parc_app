@@ -1,0 +1,5 @@
+version: "3.1"
+services:
+  scheduler:
+    volumes:
+      - /mnt/c/Users/daite/Documents/Python_Projects/free_parc_app/orchestration/data:/usr/local/airflow/data
